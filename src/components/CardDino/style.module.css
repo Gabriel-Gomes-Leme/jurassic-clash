@@ -1,0 +1,25 @@
+.cardDino{
+    width: 100%;
+    border-radius: 8px;
+}
+.cardImage{
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+}
+.cardBody{
+    padding: 16px;
+    background-color: #fff;
+}
+.cardStats{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+}
+.cardStat{
+    width: 100%;
+    padding: 8px;
+    background-color: var(--background, #eee);
+    color: var(--light, #fefefe);
+}
