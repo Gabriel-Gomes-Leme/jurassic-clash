@@ -17,7 +17,7 @@ const borderColors = {
 
 export function CardDino({ card }: cardProps) {
   return (
-    <div className={styles.cardDino} style={{border: `4px solid ${borderColors[card.rarity]}`}} key={card.id}>
+    <div className={styles.cardDino} style={{border: `6px solid ${borderColors[card.rarity]}`}} key={card.id}>
       <img
         src={card.image}
         alt={card.name}
@@ -25,7 +25,7 @@ export function CardDino({ card }: cardProps) {
         className={styles.cardImage}
       />
       <div className={styles.cardBody}>
-        <h2 className="card__title">{card.name}</h2>
+        <h2 className="card__title fw-bold" style={{color: borderColors[card.rarity]}}>{card.name}</h2>
         <p className="card__description">{card.description}</p>
       </div>
       <div className={styles.cardStats}>
@@ -38,7 +38,7 @@ export function CardDino({ card }: cardProps) {
             aria-label="Vida"
             icon={faHeart}
           ></FontAwesomeIcon> {card.hp}</span>
-        <span aria-label="Vida" title="Vida" className={styles.cardStat} style={{ "--background": "#41a6e0" } as React.CSSProperties}>
+        <span aria-label="Defesa" title="Defesa" className={styles.cardStat} style={{ "--background": "#41a6e0" } as React.CSSProperties}>
           <FontAwesomeIcon
             aria-label="Defesa"
             icon={faShield}
