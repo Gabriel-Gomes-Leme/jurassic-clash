@@ -4,7 +4,7 @@ export const InitialGameState : GameModel = {
     step: 'start',
     player : {
         name: '',
-        money: 260,
+        money: 0,
         deck: []
     }
 }

@@ -6,6 +6,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons/faHeart";
 
 type cardProps = {
   card: CardModel;
+  type:"player" | "shop"
 };
 
 const borderColors = {
@@ -15,7 +16,12 @@ const borderColors = {
   legendary: "#e7be36",
 };
 
-export function CardDino({ card }: cardProps) {
+const titleSize ={
+  player: "0.9rem",
+  shop: "1.2rem"
+}
+
+export function CardDino({ card, type }: cardProps) {
   return (
     <div className={styles.cardDino} style={{border: `6px solid ${borderColors[card.rarity]}`}} key={card.id}>
       <img
@@ -25,8 +31,8 @@ export function CardDino({ card }: cardProps) {
         className={styles.cardImage}
       />
       <div className={styles.cardBody}>
-        <h2 className="card__title fw-bold" style={{color: borderColors[card.rarity]}}>{card.name}</h2>
-        <p className="card__description">{card.description}</p>
+        <h2 className="card__title fw-bold" style={{color: borderColors[card.rarity], fontSize: titleSize[type]}}>{card.name}</h2>
+        {type === "shop" && <p className="card__description">{card.description}</p>}
       </div>
       <div className={styles.cardStats}>
         <span title="Ataque" className={styles.cardStat} style={{ "--background": "#970000" } as React.CSSProperties}><FontAwesomeIcon

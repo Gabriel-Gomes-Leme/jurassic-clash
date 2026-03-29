@@ -2,6 +2,7 @@ import { useRef } from "react";
 import type { PlayerModel } from "../../models/PlayerModel";
 import { GameActionsTypes } from "../../contexts/GameActions";
 import { useGameContext } from "../../contexts/useGameContext";
+import style from "./style.module.css";
 
 export function Form() {
   const userNameInput = useRef<HTMLInputElement>(null);
@@ -15,14 +16,15 @@ export function Form() {
 
     const newPlayer: PlayerModel = {
       name: userName,
-      money: 260,
+      money: 340,
       deck: [],
     };
     dispatch({ type: GameActionsTypes.SET_PLAYER_NAME, payload: newPlayer });
   }
   return (
-    <form onSubmit={handleCreateUser}>
-      <input type="text" placeholder="Seu nome" ref={userNameInput} />
+    <form onSubmit={handleCreateUser} className={style.form}>
+      <input type="text" placeholder="Seu nome" ref={userNameInput} className={style.field} />
+      <button type="submit" className="btn btn--green">Criar Usuário</button>
     </form>
   );
 }

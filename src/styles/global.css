@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(31, 37, 57);
+    background: url(../../public/hero/jurassic-bg.webp);
     font-family: 'Ubuntu', sans-serif;
 }
 .title-1{
@@ -8,4 +8,26 @@ body{
 }
 .text-center{
     text-align: center;
+}
+
+.btn{
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn--green{
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+}
+.btn--green:hover{
+    background-color: #218838;
+    border-color: #1e7e34;
+    color: #fff;
+}
+
+.light{
+    color: var(--light, #fefefe);
 }
