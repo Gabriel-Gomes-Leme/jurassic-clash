@@ -1,16 +1,56 @@
 .cardDino{
     width: 100%;
+    height: 400px;
     border-radius: 8px;
+     position: relative;
+    transition: all 0.6s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    overflow: unset !important;
 }
+
+.cardFace{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+     width: 100%;
+     height: 100%;
+    backface-visibility: hidden;
+    transition: all 0.6s ease;
+    padding: 24px;
+}
+
+.cardFront {
+    transform: rotateY(0deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.cardBack {
+    transform: rotateY(180deg);
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardDino:hover .cardFront {
+    transform: rotateY(-180deg);
+}
+
+.cardDino:hover .cardBack {
+    transform: rotateY(0deg);
+}
+
 .cardImage{
     width: 100%;
     aspect-ratio: 1/1;
     object-fit: cover;
     object-position: center;
-}
-.cardBody{
-    padding: 16px;
-    background-color: #fff;
 }
 .cardStats{
     display: grid;
@@ -20,6 +60,6 @@
 .cardStat{
     width: 100%;
     padding: 8px;
-    background-color: var(--background, #eee);
-    color: var(--light, #fefefe);
+    background-color: transparent;
+    color: var(--color, #fefefe);
 }
