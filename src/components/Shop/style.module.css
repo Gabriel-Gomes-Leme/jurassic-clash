@@ -1,0 +1,20 @@
+.showDeckButton{
+    width: 80px;
+    height: 80px;
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    border-radius: 50%;
+    background-color: var(--primary-color, #fff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 12px;
+    border: 0;
+}
+.deckCount{
+    padding: 8px;
+    color: var(--red, #f00);
+    font-size: 13px;
+}

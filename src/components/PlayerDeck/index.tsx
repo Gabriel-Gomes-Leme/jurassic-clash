@@ -6,7 +6,11 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import type { CardModel } from "../../models/CardModel";
 import { GameActionsTypes } from "../../contexts/GameActions";
 
-export function PlayerDeck() {
+type PlayerDeckProps ={
+  closeDeck: () => void
+}
+
+export function PlayerDeck({closeDeck}: PlayerDeckProps) {
   const { state, dispatch } = useGameContext();
 
   function handleRemoveCard(card: CardModel) {
@@ -15,13 +19,16 @@ export function PlayerDeck() {
   }
   return (
     <div className={style.playerDeck}>
-      <h2 className="light">Seu Deck</h2>
+      <button className={style.closeButton} onClick={closeDeck}>
+        <FontAwesomeIcon icon={faXmark} />
+      </button>
+      <h2 className="light">Deck</h2>
       <div className="row">
         {state.player.deck.length > 0 &&
           state.player.deck.map((card) => {
             return (
               <div
-                className="col-12 col-md-3 col-lg-2 py-2 px-0 position-relative"
+                className="col-12 col-md-4 col-lg-3 py-2 px-1 position-relative"
                 key={card.id}
               >
                 <button

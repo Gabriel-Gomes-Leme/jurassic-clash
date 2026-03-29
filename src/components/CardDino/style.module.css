@@ -6,7 +6,27 @@
     transition: all 0.6s ease;
     transform-style: preserve-3d;
     perspective: 1000px;
-    overflow: unset !important;
+    overflow: hidden;
+}
+
+.cardIconInfo{
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(17, 176, 105);
+    color: var(--light, #fff);
+    cursor: pointer;
+    z-index: 100;
+    font-size: 22px;
+}
+.cardIconInfo:hover{
+    opacity: .9;
 }
 
 .cardFace{
@@ -18,40 +38,33 @@
     left: 0;
      width: 100%;
      height: 100%;
-    backface-visibility: hidden;
     transition: all 0.6s ease;
     padding: 24px;
 }
 
 .cardFront {
-    transform: rotateY(0deg);
+    transform: translateX(0);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
 }
 
 .cardBack {
-    transform: rotateY(180deg);
+    transform: translateX(100%);
     background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.cardDino:hover .cardFront {
-    transform: rotateY(-180deg);
+.fliped .cardFront {
+    transform: translateX(-100%);
 }
 
-.cardDino:hover .cardBack {
-    transform: rotateY(0deg);
+.fliped .cardBack {
+    transform: translateX(0);
 }
 
-.cardImage{
-    width: 100%;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-    object-position: center;
-}
 .cardStats{
     display: grid;
     grid-template-columns: repeat(3, 1fr);

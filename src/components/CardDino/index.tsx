@@ -1,8 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { CardModel } from "../../models/CardModel";
 import styles from "./style.module.css";
-import { faBolt, faShield } from "@fortawesome/free-solid-svg-icons";
+import { faBolt, faInfo, faShield } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons/faHeart";
+import { useState } from "react";
 
 type cardProps = {
   card: CardModel;
@@ -22,11 +23,21 @@ const titleSize = {
 };
 
 export function CardDino({ card, type }: cardProps) {
+  const [fliped, setFliped] = useState(false)
+  console.log(fliped)
   return (
     <div
-      className={styles.cardDino}
+    aria-label={card.name}
+    title={card.name}
+      className={`${styles.cardDino} ${fliped ? styles.fliped : ''}`}
       key={card.id}
     >
+              <span className={styles.cardIconInfo} onClick={() => setFliped(!fliped)}>
+          <FontAwesomeIcon icon={faInfo}></FontAwesomeIcon>
+        </span>
+        <span className={styles.cardIconInfo} onClick={() => setFliped(!fliped)}>
+          <FontAwesomeIcon icon={faInfo}></FontAwesomeIcon>
+        </span>
       <div className={`${styles.cardFace} ${styles.cardFront}`} 
       style={{ border: `6px solid ${borderColors[card.rarity]}`,
        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.5) 51%, rgba(0,0,0,1) 96%), url(${card.image})` }}>
@@ -74,7 +85,7 @@ export function CardDino({ card, type }: cardProps) {
         </div>
       </div>
       <div className={`${styles.cardFace} ${styles.cardBack}`} style={{ border: `6px solid ${borderColors[card.rarity]}` }}>
-        {type === "shop" && <p className="card__description text-center fs-18">{card.description}</p>}
+        {card.description != "" && <p className="card__description text-center fs-18">{card.description}</p>}
       </div>
     </div>
   );
