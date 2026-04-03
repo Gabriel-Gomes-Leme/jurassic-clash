@@ -3,9 +3,10 @@ import type { GameModel } from "../models/GameModel";
 export const InitialGameState : GameModel = {
     step: 'start',
     maxCardsInDeck: 4,
+    initialMoney: 290,
     player : {
         name: '',
-        money: 0,
+        money: 290,
         deck: []
     }
 }

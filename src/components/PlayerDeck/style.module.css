@@ -5,8 +5,7 @@
     transform: translate(-50%, -50%);
     width: 100%;
     max-width: 1400px;
-    max-height: 800px;
-    overflow-y: auto;
+    max-height: 100%;
     background-color: #372e27;
 
     padding: 24px;
@@ -35,6 +34,7 @@
   padding: 20px;
   box-shadow: 0 0 30px rgba(0,0,0,0.7);
   margin: 20px 0;
+  overflow-y: auto;
 }
 
 .removeCard{

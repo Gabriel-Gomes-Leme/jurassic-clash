@@ -6,25 +6,42 @@ import style from "./style.module.css";
 
 export function Form() {
   const userNameInput = useRef<HTMLInputElement>(null);
-  const {state, dispatch} = useGameContext()
-  console.log(state)
+  const { state, dispatch } = useGameContext();
+  console.log(state);
   function handleCreateUser(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (userNameInput.current == null) return;
     const userName = userNameInput.current.value.trim();
     console.log(userName);
 
-    const newPlayer: PlayerModel = {
-      name: userName,
-      money: 340,
-      deck: [],
-    };
-    dispatch({ type: GameActionsTypes.SET_PLAYER_NAME, payload: newPlayer });
+    if (userName != "") {
+      const newPlayer: PlayerModel = {
+        name: userName,
+        money: state.initialMoney,
+        deck: [],
+      };
+      dispatch({ type: GameActionsTypes.SET_PLAYER_NAME, payload: newPlayer });
+    }
+    else{
+      alert('Por favor, insira um nome válido')
+    }
   }
   return (
     <form onSubmit={handleCreateUser} className={style.form}>
-      <input type="text" placeholder="Seu nome" ref={userNameInput} className={style.field} />
-      <button type="submit" className="btn btn--green">Criar Usuário</button>
+      <input
+        type="text"
+        placeholder="Seu nome"
+        ref={userNameInput}
+        className={style.field}
+      />
+      <button
+        aria-label="Criar usuário"
+        title="Criar usuário"
+        type="submit"
+        className="btn btn--green"
+      >
+        Criar Usuário
+      </button>
     </form>
   );
 }

@@ -18,39 +18,47 @@ export function GameReducer(
         },
       };
     case "BUY_CARD":
+      if (
+        state.player.money < action.payload.card.cost ||
+        state.player.deck.length >= state.maxCardsInDeck
+      ) {
+        return state;
+      }
+
       return {
         ...state,
-        player:{
+        player: {
           ...state.player,
           money: state.player.money - action.payload.card.cost,
-          deck:[...state.player.deck, action.payload.card]
-        }
+          deck: [...state.player.deck, action.payload.card],
+        },
       };
-      case "REMOVE_CARD":
+    case "REMOVE_CARD":
       return {
         ...state,
-        player:{
+        player: {
           ...state.player,
           money: state.player.money + action.payload.card.cost,
-          deck: state.player.deck.filter((card) => card.id != action.payload.card.id)
-        }
+          deck: state.player.deck.filter(
+            (card) => card.id != action.payload.card.id,
+          ),
+        },
       };
-      case "RESET_DECK":
-        return{
-          ...state,
-          player:{
-            ...state.player,
-            money: 340,
-            deck: []
-          }
-        }
-      case "START_GAME":
+    case "RESET_DECK":
       return {
         ...state,
-        step: "battle"
+        player: {
+          ...state.player,
+          money: state.initialMoney,
+          deck: [],
+        },
       };
-  };
-  
+    case "START_GAME":
+      return {
+        ...state,
+        step: "battle",
+      };
+  }
 
   return state;
 }
