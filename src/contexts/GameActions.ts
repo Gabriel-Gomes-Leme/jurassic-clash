@@ -3,8 +3,9 @@ import type { CardModel } from "../models/CardModel"
 export enum GameActionsTypes {
     SET_PLAYER_NAME = 'SET_PLAYER_NAME',
     BUY_CARD = 'BUY_CARD',
+    RESET_DECK = 'RESET_DECK',
     REMOVE_CARD = 'REMOVE_CARD',
-    NEXT_STEP = 'NEXT_STEP',
+    START_GAME = 'START_GAME',
 }
 
 export type GameActionModels = |{
@@ -20,6 +21,8 @@ export type GameActionModels = |{
         payload: {card: CardModel}
     }
     | {
-        type: GameActionsTypes.NEXT_STEP,
-        payload: undefined
+        type: GameActionsTypes.RESET_DECK
+    }
+    | {
+        type: GameActionsTypes.START_GAME
     }

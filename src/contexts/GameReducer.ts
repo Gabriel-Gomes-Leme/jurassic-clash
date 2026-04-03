@@ -35,6 +35,20 @@ export function GameReducer(
           deck: state.player.deck.filter((card) => card.id != action.payload.card.id)
         }
       };
+      case "RESET_DECK":
+        return{
+          ...state,
+          player:{
+            ...state.player,
+            money: 340,
+            deck: []
+          }
+        }
+      case "START_GAME":
+      return {
+        ...state,
+        step: "battle"
+      };
   };
   
 

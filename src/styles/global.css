@@ -1,6 +1,6 @@
 body{
     background: url(../../public/hero/jurassic-bg.webp);
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Archivo Black', sans-serif;
 }
 .title-1{
     font-size: 2.65rem;
@@ -25,6 +25,16 @@ body{
 .btn--green:hover{
     background-color: #218838;
     border-color: #1e7e34;
+    color: #fff;
+}
+.btn--red{
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+.btn--red:hover{
+    background-color: #c82333;
+    border-color: #bd2130;
     color: #fff;
 }
 

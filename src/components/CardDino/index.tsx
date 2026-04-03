@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { CardModel } from "../../models/CardModel";
 import styles from "./style.module.css";
-import { faBolt, faInfo, faShield } from "@fortawesome/free-solid-svg-icons";
+import { faBolt, faInfo, faPhotoFilm, faShield } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons/faHeart";
 import { useState } from "react";
 
@@ -23,33 +23,33 @@ const titleSize = {
 };
 
 export function CardDino({ card, type }: cardProps) {
-  const [fliped, setFliped] = useState(false)
-  console.log(fliped)
+  const [fliped, setFliped] = useState(false);
   return (
     <div
-    aria-label={card.name}
-    title={card.name}
-      className={`${styles.cardDino} ${fliped ? styles.fliped : ''}`}
+      aria-label={card.name}
+      title={card.name}
+      className={`${styles.cardDino} ${fliped ? styles.fliped : ""}`}
       key={card.id}
     >
-              <span className={styles.cardIconInfo} onClick={() => setFliped(!fliped)}>
-          <FontAwesomeIcon icon={faInfo}></FontAwesomeIcon>
-        </span>
-        <span className={styles.cardIconInfo} onClick={() => setFliped(!fliped)}>
-          <FontAwesomeIcon icon={faInfo}></FontAwesomeIcon>
-        </span>
-      <div className={`${styles.cardFace} ${styles.cardFront}`} 
-      style={{ border: `6px solid ${borderColors[card.rarity]}`,
-       backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.5) 51%, rgba(0,0,0,1) 96%), url(${card.image})` }}>
-          <h2
-            className="card__title fw-bold"
-            style={{
-              color: borderColors[card.rarity],
-              fontSize: titleSize[type],
-            }}
-          >
-            {card.name}
-          </h2>
+      <span className={styles.cardIconInfo} onClick={() => setFliped(!fliped)}>
+        <FontAwesomeIcon icon={!fliped ? faInfo : faPhotoFilm}></FontAwesomeIcon>
+      </span>
+      <div
+        className={`${styles.cardFace} ${styles.cardFront}`}
+        style={{
+          border: `6px solid ${borderColors[card.rarity]}`,
+          backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.5) 51%, rgba(0,0,0,1) 96%), url(${card.image})`,
+        }}
+      >
+        <h2
+          className="card__title fw-bold"
+          style={{
+            color: borderColors[card.rarity],
+            fontSize: titleSize[type],
+          }}
+        >
+          {card.name}
+        </h2>
         <div className={styles.cardStats}>
           <span
             title="Ataque"
@@ -80,12 +80,19 @@ export function CardDino({ card, type }: cardProps) {
               aria-label="Defesa"
               icon={faShield}
             ></FontAwesomeIcon>
-            {card.defense}
+             {card.defense}
           </span>
         </div>
       </div>
-      <div className={`${styles.cardFace} ${styles.cardBack}`} style={{ border: `6px solid ${borderColors[card.rarity]}` }}>
-        {card.description != "" && <p className="card__description text-center fs-18">{card.description}</p>}
+      <div
+        className={`${styles.cardFace} ${styles.cardBack}`}
+        style={{ border: `6px solid ${borderColors[card.rarity]}` }}
+      >
+        {card.description != "" && (
+          <p className="card__description text-center fs-18">
+            {card.description}
+          </p>
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,12 @@
+.money{
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+    padding: 12px;
+    background-color: var(--primary-color, #654828);
+    font-size: 24px;
+    color: white;
+}
+.moneyLabel{
+    color: #d3bf10;
+}
