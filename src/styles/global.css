@@ -1,5 +1,12 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body{
-    background: url(../../public/hero/jurassic-bg.webp);
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 55%, rgba(0, 0, 0, 0.4) 60%), url(../../public/hero/jurassic-bg.webp);
     font-family: 'Archivo Black', sans-serif;
 }
 .title-1{

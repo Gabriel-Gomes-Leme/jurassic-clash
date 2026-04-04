@@ -4,6 +4,9 @@
     right: 12px;
     padding: 12px;
     background-color: var(--primary-color, #654828);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border: 8px solid var(--primary-color, #71691b);
+    border-radius: 16px;
     font-size: 24px;
     color: white;
 }

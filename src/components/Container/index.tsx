@@ -1,11 +1,12 @@
 
 import styles from './style.module.css'
 type containerProps = {
-    children: React.ReactNode
+    children: React.ReactNode,
+    type?: "fluid" | ""
 }
-export function Container({children} : containerProps){
+export function Container({children, type} : containerProps){
     return(
-        <div className={styles.container}>
+        <div className={type === "fluid" ? 'container-fluid': styles.container}>
             {children}
         </div>
     )

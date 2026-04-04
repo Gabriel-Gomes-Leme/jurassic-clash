@@ -54,10 +54,10 @@ export function PlayerDeck({ closeDeck }: PlayerDeckProps) {
         </div>
       </div>
       <div className="d-flex align-items-center">
-        {state.player.deck.length > state.maxCardsInDeck -1 && <button className="btn btn--green me-2" onClick={() => handleStartGame()}>
+        {state.player.deck.length > state.maxCardsInDeck -1 && <button aria-label="Iniciar Jogo" title="Iniciar Jogo" className="btn btn--green me-2" onClick={() => handleStartGame()}>
           Iniciar Jogo
         </button>}
-        {state.player.deck.length > 0 && <button className="btn btn--red" onClick={() => handleResetDeck()}>
+        {state.player.deck.length > 0 && <button aria-label="Resetar Deck" title="Resetar Deck" className="btn btn--red" onClick={() => handleResetDeck()}>
           Resetar Deck
         </button>}
       </div>

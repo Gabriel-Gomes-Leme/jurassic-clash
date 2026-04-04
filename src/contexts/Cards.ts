@@ -34,7 +34,7 @@ export const Cards: CardModel[] = [
     attack: 85,
     defense: 65,
     hp: 105,
-    cost: 75,
+    cost: 60,
     type: "carnivore",
     rarity: Rarity.RARE,
     description:
@@ -60,9 +60,9 @@ export const Cards: CardModel[] = [
     attack: 90,
     defense: 60,
     hp: 100,
-    cost: 80,
+    cost: 90,
     type: "carnivore",
-    rarity: Rarity.RARE,
+    rarity: Rarity.EPIC,
     description:
       "Predador ágil com chifre nasal, equilibrando velocidade e força em ataques diretos.",
   },
@@ -86,7 +86,7 @@ export const Cards: CardModel[] = [
     attack: 75,
     defense: 65,
     hp: 120,
-    cost: 95,
+    cost: 90,
     type: "carnivore",
     rarity: Rarity.EPIC,
     description:
@@ -112,7 +112,7 @@ export const Cards: CardModel[] = [
     attack: 78,
     defense: 68,
     hp: 110,
-    cost: 70,
+    cost: 60,
     type: "carnivore",
     rarity: Rarity.RARE,
     description:
@@ -138,7 +138,7 @@ export const Cards: CardModel[] = [
     attack: 95,
     defense: 62,
     hp: 105,
-    cost: 95,
+    cost: 90,
     type: "carnivore",
     rarity: Rarity.EPIC,
     description:
@@ -164,7 +164,7 @@ export const Cards: CardModel[] = [
     attack: 65,
     defense: 90,
     hp: 90,
-    cost: 75,
+    cost: 60,
     type: "herbivore",
     rarity: Rarity.RARE,
     description:
@@ -216,7 +216,7 @@ export const Cards: CardModel[] = [
   attack: 50,
   defense: 45,
   hp: 85,
-  cost: 50,
+  cost: 40,
   type: "carnivore",
   rarity: Rarity.COMMON,
   description: "Crocodiliano terrestre agressivo, combina força e resistência moderada.",

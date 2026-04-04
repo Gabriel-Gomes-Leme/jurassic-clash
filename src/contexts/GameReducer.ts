@@ -33,6 +33,14 @@ export function GameReducer(
           deck: [...state.player.deck, action.payload.card],
         },
       };
+    case "SET_CPU_DECK":
+      return{
+        ...state,
+        battle:{
+          ...state.battle,
+          cpuDeck: action.payload.deck
+        }
+      }
     case "REMOVE_CARD":
       return {
         ...state,
@@ -57,7 +65,44 @@ export function GameReducer(
       return {
         ...state,
         step: "battle",
+        battle:{
+          ...state.battle,
+          playerDeck: state.player.deck,
+          round: 1,
+          turn: state.player.name,
+        }
       };
+    case "PLAYER_SELECT_CARD":
+      return{
+        ...state,
+        player:{
+          ...state.player,
+          deck: state.player.deck.filter((card) => card.id !== action.payload.card.id)
+        },
+        battle:{
+          ...state.battle,
+          arena:{
+            ...state.battle.arena,
+            playerSelectedCard: action.payload.card
+          },
+          turn: 'cpu'
+        }
+      };
+    case "CPU_SELECT_CARD":
+      return{
+        ...state,
+        player:{
+          ...state.player
+        },
+        battle:{
+          ...state.battle,
+          cpuDeck: state.battle.cpuDeck.filter((card) => card.id != action.payload.card.id),
+          arena:{
+            ...state.battle.arena,
+            cpuSelectedCard: action.payload.card
+          }
+        }
+      }
   }
 
   return state;
