@@ -68,7 +68,7 @@ export function CardDino({ card, type }: cardProps) {
             style={{ "--color": "#49c26f" } as React.CSSProperties}
           >
             <FontAwesomeIcon aria-label="Vida" icon={faHeart}></FontAwesomeIcon>{" "}
-            {card.hp}
+            {card.maxHp}
           </span>
           <span
             aria-label="Defesa"

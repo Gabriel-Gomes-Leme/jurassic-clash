@@ -13,6 +13,7 @@ export type CardModel={
     attack: number,
     defense: number,
     type: DinoType,
+    maxHp: number,
     hp: number,
     cost: number,
     rarity: Rarity,

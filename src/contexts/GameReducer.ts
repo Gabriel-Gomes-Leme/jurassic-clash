@@ -34,13 +34,13 @@ export function GameReducer(
         },
       };
     case "SET_CPU_DECK":
-      return{
+      return {
         ...state,
-        battle:{
+        battle: {
           ...state.battle,
-          cpuDeck: action.payload.deck
-        }
-      }
+          cpuDeck: action.payload.deck,
+        },
+      };
     case "REMOVE_CARD":
       return {
         ...state,
@@ -65,44 +65,68 @@ export function GameReducer(
       return {
         ...state,
         step: "battle",
-        battle:{
+        battle: {
           ...state.battle,
           playerDeck: state.player.deck,
           round: 1,
-          turn: state.player.name,
-        }
+          arena:{
+            ...state.battle.arena,
+            turn: state.player.name,
+          }
+        },
       };
     case "PLAYER_SELECT_CARD":
-      return{
+      return {
         ...state,
-        player:{
+        player: {
           ...state.player,
-          deck: state.player.deck.filter((card) => card.id !== action.payload.card.id)
+          deck: state.player.deck.filter(
+            (card) => card.id !== action.payload.card.id,
+          ),
         },
-        battle:{
+        battle: {
           ...state.battle,
-          arena:{
+          arena: {
             ...state.battle.arena,
-            playerSelectedCard: action.payload.card
+            turn: "cpu",
+            playerSelectedCard: action.payload.card,
           },
-          turn: 'cpu'
-        }
+        },
       };
     case "CPU_SELECT_CARD":
-      return{
+      return {
         ...state,
-        player:{
-          ...state.player
+        player: {
+          ...state.player,
         },
-        battle:{
+        battle: {
           ...state.battle,
-          cpuDeck: state.battle.cpuDeck.filter((card) => card.id != action.payload.card.id),
-          arena:{
+          cpuDeck: state.battle.cpuDeck.filter(
+            (card) => card.id != action.payload.card.id,
+          ),
+          arena: {
             ...state.battle.arena,
-            cpuSelectedCard: action.payload.card
-          }
-        }
-      }
+            cpuSelectedCard: action.payload.card,
+          },
+        },
+      };
+    case "START_BATTLE": {
+      return {
+        ...state,
+        player: {
+          ...state.player,
+        },
+        battle: {
+          ...state.battle,
+          arena: {
+            ...state.battle.arena,
+            playerSelectedCard: action.payload.playerCard,
+            cpuSelectedCard: action.payload.cpuCard,
+            turn: state.battle.arena.turn === 'player' ? 'cpu' : state.player.name,
+          },
+        },
+      };
+    };
   }
 
   return state;

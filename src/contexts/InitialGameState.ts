@@ -15,10 +15,10 @@ export const InitialGameState : GameModel = {
         playerDeck: [],
         cpuDeck: [],
         round: 0,
-        turn: 'player',
         playerScore: 0,
         cpuScore: 0,
         arena:{
+            turn: 'player',
             playerSelectedCard: null,
             cpuSelectedCard: null
         }

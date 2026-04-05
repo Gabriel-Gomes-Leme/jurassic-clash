@@ -11,10 +11,10 @@ export type GameModel = {
         playerDeck: PlayerModel['deck'],
         cpuDeck: PlayerModel['deck'],
         round: number,
-        turn: PlayerModel['name'] | 'cpu',
         playerScore: number,
         cpuScore: number,
         arena:{
+            turn: PlayerModel['name'] | 'cpu',
             playerSelectedCard: CardModel | null,
             cpuSelectedCard: CardModel | null,
         }
