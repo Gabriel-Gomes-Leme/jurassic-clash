@@ -36,13 +36,13 @@ export type GameActionModels = |{
     }
     | {
         type: GameActionsTypes.PLAYER_SELECT_CARD,
-        payload: {card: CardModel}
+        payload: {card: CardModel | null}
     }
     | {
         type: GameActionsTypes.CPU_SELECT_CARD,
-        payload: {card: CardModel}
+        payload: {card: CardModel | null}
     }
     | {
         type: GameActionsTypes.START_BATTLE,
-        payload: {playerCard: CardModel | null, cpuCard: CardModel | null}
+        payload: {playerCard: CardModel | null, cpuCard: CardModel | null, turn: string}
     }

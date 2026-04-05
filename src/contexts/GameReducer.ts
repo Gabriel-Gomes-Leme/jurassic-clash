@@ -81,7 +81,7 @@ export function GameReducer(
         player: {
           ...state.player,
           deck: state.player.deck.filter(
-            (card) => card.id !== action.payload.card.id,
+            (card) => card.id !== action.payload.card?.id,
           ),
         },
         battle: {
@@ -102,11 +102,12 @@ export function GameReducer(
         battle: {
           ...state.battle,
           cpuDeck: state.battle.cpuDeck.filter(
-            (card) => card.id != action.payload.card.id,
+            (card) => card.id != action.payload.card?.id,
           ),
           arena: {
             ...state.battle.arena,
             cpuSelectedCard: action.payload.card,
+            turn: state.player.name,
           },
         },
       };
@@ -122,7 +123,7 @@ export function GameReducer(
             ...state.battle.arena,
             playerSelectedCard: action.payload.playerCard,
             cpuSelectedCard: action.payload.cpuCard,
-            turn: state.battle.arena.turn === 'player' ? 'cpu' : state.player.name,
+            turn: action.payload.turn,
           },
         },
       };
