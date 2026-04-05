@@ -13,6 +13,7 @@ export type GameModel = {
         round: number,
         playerScore: number,
         cpuScore: number,
+        winner: PlayerModel['name'] | 'cpu' | null,
         arena:{
             turn: PlayerModel['name'] | 'cpu',
             playerSelectedCard: CardModel | null,

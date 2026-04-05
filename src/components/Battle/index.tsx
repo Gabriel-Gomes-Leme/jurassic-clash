@@ -72,13 +72,23 @@ export function Battle() {
       return card;
     }
     const newHp = Math.max(0, card.hp - damage);
-    console.log(
-      `Atualizando HP de ${card.name}: ${card.hp} - ${damage} = ${newHp}`,
-    );
     return {
       ...card,
       hp: newHp,
     };
+  }
+
+  // Funçao que calcula os scores de cada jogador
+  function handleScore(updateCpuCard: CardModel, updatePlayerCard: CardModel) {
+    dispatch({
+      type: GameActionsTypes.SET_SCORE,
+      payload: {
+        playerPoint:
+          updateCpuCard.hp,
+        cpuPoint:
+          updatePlayerCard.hp
+      },
+    });
   }
   function handleStartFight(
     playerCard: CardModel | null,
@@ -94,9 +104,6 @@ export function Battle() {
         cpuCard.attack * (1 - playerCard.defense / 100),
       );
 
-      // console.log("Dano causado pelo jogador:", cpuDamage);
-      // console.log("Dano causado pela CPU:", playerDamage);
-
       const updateCpuCard = updateDamageCard(cpuCard, cpuDamage);
       const updatePlayerCard = updateDamageCard(playerCard, playerDamage);
 
@@ -111,10 +118,18 @@ export function Battle() {
               : "cpu",
         },
       });
+
+      // Define os scores de cada jogador
+      handleScore(updateCpuCard, updatePlayerCard);
     }
   }
-  console.log(state.battle.arena.playerSelectedCard);
-  console.log(state.battle.arena.cpuSelectedCard);
+
+  function handleWinner(winner: string) {
+    dispatch({
+      type: GameActionsTypes.FINISH_BATTLE,
+      payload: { winner: winner },
+    });
+  }
 
   useEffect(() => {
     if (
@@ -123,13 +138,26 @@ export function Battle() {
       state.battle.arena.turn === "cpu"
     ) {
       handleCpuSelectCard();
-      console.log("CPU selecionando carta...");
     }
-  }, [state.battle.arena.cpuSelectedCard, state.battle.arena.turn]);
+  }, [state.battle.arena.cpuSelectedCard,
+  state.battle.arena.turn,
+  state.battle.cpuDeck.length]);
 
   useEffect(() => {
     handleCpuDeck(state.maxCardsInDeck);
   }, []);
+
+  useEffect(() => {
+    if (state.battle.winner) {
+      return;
+    }
+    if (state.battle.cpuScore >= 4) {
+      handleWinner("cpu");
+    }
+    if (state.battle.playerScore >= 4) {
+      handleWinner(state.player.name);
+    }
+  }, [state.battle.cpuScore, state.battle.playerScore, state.battle.winner]);
 
   return (
     <>
@@ -235,6 +263,13 @@ export function Battle() {
             </div>
           </div>
         </div>
+        {state.battle.winner && (
+          <div className={style.winner}>
+            <h2 className="text-center primary-color">
+              {state.battle.winner} Venceu !
+            </h2>
+          </div>
+        )}
       </div>
     </>
   );

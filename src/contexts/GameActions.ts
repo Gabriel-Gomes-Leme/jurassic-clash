@@ -10,6 +10,8 @@ export enum GameActionsTypes {
     PLAYER_SELECT_CARD = 'PLAYER_SELECT_CARD',
     CPU_SELECT_CARD = 'CPU_SELECT_CARD',
     START_BATTLE = 'START_BATTLE',
+    SET_SCORE = 'SET_SCORE',
+    FINISH_BATTLE = 'FINISH_BATTLE'
 }
 
 export type GameActionModels = |{
@@ -45,4 +47,12 @@ export type GameActionModels = |{
     | {
         type: GameActionsTypes.START_BATTLE,
         payload: {playerCard: CardModel | null, cpuCard: CardModel | null, turn: string}
+    }
+    | {
+        type: GameActionsTypes.SET_SCORE,
+        payload: { playerPoint: number, cpuPoint: number }
+    }
+    | {
+        type: GameActionsTypes.FINISH_BATTLE,
+        payload : {winner: string}
     }

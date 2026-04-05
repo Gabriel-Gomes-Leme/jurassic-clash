@@ -17,6 +17,7 @@ export const InitialGameState : GameModel = {
         round: 0,
         playerScore: 0,
         cpuScore: 0,
+        winner: null,
         arena:{
             turn: 'player',
             playerSelectedCard: null,

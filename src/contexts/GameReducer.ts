@@ -128,6 +128,37 @@ export function GameReducer(
         },
       };
     };
+    case "SET_SCORE": {
+      return{
+        ...state,
+        player:{
+          ...state.player,
+        },
+        battle:{
+          ...state.battle,
+          playerScore : state.battle.playerScore + (action.payload.playerPoint <= 0 ? + 1 : + 0 ),
+          cpuScore: state.battle.cpuScore + (action.payload.cpuPoint <= 0 ? + 1 : + 0),
+          arena:{
+            ...state.battle.arena,
+          }
+        },
+      }
+    };
+    case "FINISH_BATTLE": {
+      return{
+        ...state,
+        player:{
+          ...state.player,
+        },
+        battle:{
+          ...state.battle,
+          winner: action.payload.winner,
+          arena:{
+            ...state.battle.arena,
+          }
+        },
+      }
+    }
   }
 
   return state;
