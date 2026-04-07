@@ -194,7 +194,7 @@ export function Battle() {
               {state.battle.arena.turn} turn
             </h2>
             <div className="battleCamp">
-              <div className="playerCard">
+              <div className={style.cardSelected}>
                 {state.battle.arena.playerSelectedCard ? (
                   <>
                     <CardDino
@@ -205,7 +205,7 @@ export function Battle() {
                       <div
                         className={style.cardLifeBar}
                         style={{
-                          width: `${(state.battle.arena.playerSelectedCard.hp / state.battle.arena.playerSelectedCard.maxHp) * 100}%`,
+                          height: `${(state.battle.arena.playerSelectedCard.hp / state.battle.arena.playerSelectedCard.maxHp) * 100}%`,
                         }}
                       ></div>
                     </div>
@@ -215,7 +215,7 @@ export function Battle() {
                 )}
               </div>
               <h2 className="light text-center my-5">VS</h2>
-              <div className="cpuCard">
+              <div className={style.cardSelected}>
                 {state.battle.arena.cpuSelectedCard ? (
                   <>
                     <CardDino
@@ -226,7 +226,7 @@ export function Battle() {
                       <div
                         className={style.cardLifeBar}
                         style={{
-                          width: `${(state.battle.arena.cpuSelectedCard.hp / state.battle.arena.cpuSelectedCard.maxHp) * 100}%`,
+                          height: `${(state.battle.arena.cpuSelectedCard.hp / state.battle.arena.cpuSelectedCard.maxHp) * 100}%`,
                         }}
                       ></div>
                     </div>
