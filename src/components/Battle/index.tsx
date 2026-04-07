@@ -80,13 +80,15 @@ export function Battle() {
 
   // Funçao que calcula os scores de cada jogador
   function handleScore(updateCpuCard: CardModel, updatePlayerCard: CardModel) {
+    const playerWon = updateCpuCard.hp <= 0;
+    const cpuWon = updatePlayerCard.hp <= 0;
     dispatch({
       type: GameActionsTypes.SET_SCORE,
       payload: {
-        playerPoint:
-          updateCpuCard.hp,
-        cpuPoint:
-          updatePlayerCard.hp
+        playerWon:
+          playerWon,
+        cpuWon:
+          cpuWon
       },
     });
   }
@@ -153,11 +155,16 @@ export function Battle() {
     }
     if (state.battle.cpuScore >= 4) {
       handleWinner("cpu");
+      console.log('cpuScore: ' +state.battle.cpuScore)
     }
     if (state.battle.playerScore >= 4) {
       handleWinner(state.player.name);
+      console.log('playerScore: ' +state.battle.playerScore)
     }
   }, [state.battle.cpuScore, state.battle.playerScore, state.battle.winner]);
+  console.log('vencedor:' +state.battle.winner)
+  
+
 
   return (
     <>
@@ -263,13 +270,6 @@ export function Battle() {
             </div>
           </div>
         </div>
-        {state.battle.winner && (
-          <div className={style.winner}>
-            <h2 className="text-center primary-color">
-              {state.battle.winner} Venceu !
-            </h2>
-          </div>
-        )}
       </div>
     </>
   );

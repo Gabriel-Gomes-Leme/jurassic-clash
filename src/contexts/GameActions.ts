@@ -50,7 +50,7 @@ export type GameActionModels = |{
     }
     | {
         type: GameActionsTypes.SET_SCORE,
-        payload: { playerPoint: number, cpuPoint: number }
+        payload: { playerWon: boolean, cpuWon: boolean }
     }
     | {
         type: GameActionsTypes.FINISH_BATTLE,

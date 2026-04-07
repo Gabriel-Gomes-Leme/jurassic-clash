@@ -7,7 +7,7 @@ export function Heading() {
   return (
     <header className={style.header}>
       <Container>
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-center flex-column">
             <h1 className="title-1 text-center my-0">
           Bem vindo ao Jurassic Clash <FontAwesomeIcon icon={faDragon} />{" "}
         </h1>

@@ -136,8 +136,8 @@ export function GameReducer(
         },
         battle:{
           ...state.battle,
-          playerScore : state.battle.playerScore + (action.payload.playerPoint <= 0 ? + 1 : + 0 ),
-          cpuScore: state.battle.cpuScore + (action.payload.cpuPoint <= 0 ? + 1 : + 0),
+          playerScore : state.battle.playerScore + (action.payload.playerWon ? 1 : 0),
+          cpuScore: state.battle.cpuScore + (action.payload.cpuWon ? 1 : 0),
           arena:{
             ...state.battle.arena,
           }
@@ -147,6 +147,7 @@ export function GameReducer(
     case "FINISH_BATTLE": {
       return{
         ...state,
+        step: 'end',
         player:{
           ...state.player,
         },

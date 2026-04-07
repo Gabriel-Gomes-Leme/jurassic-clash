@@ -5,6 +5,7 @@ import { Heading } from "../components/Heading";
 import { Shop } from "../components/Shop";
 import { DinoCash } from "../components/DinoCash";
 import { Battle } from "../components/Battle";
+import { Winner } from "../components/Winner";
 
 export function Home() {
   const {state} = useGameContext()
@@ -21,6 +22,7 @@ export function Home() {
     <Container type="fluid">
       {state.step == 'battle' && <Battle /> }
     </Container>
+    {state.step == 'end' && <Winner/>}
     <DinoCash />
     </>
   );
