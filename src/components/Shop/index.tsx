@@ -22,6 +22,20 @@ export function Shop() {
   }
   return (
     <>
+    <div className="row">
+      <div className="col-12 col-lg-4">
+      </div>
+      <div className="col-12 col-lg-4">
+        <div className="text-center">
+          <button className="btn btn-primary">
+          Iniciar jogo
+        </button>
+        </div>
+      </div>
+      <div className="col-12 col-lg-4">
+
+      </div>
+    </div>
     {showDeck && <div className={style.overlay}></div>}
       <div className="row mt-5">
         {Cards.filter((cardShop) => !deck.includes(cardShop.id)).map((card) =>{

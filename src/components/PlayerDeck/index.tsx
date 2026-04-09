@@ -7,7 +7,7 @@ import type { CardModel } from "../../models/CardModel";
 import { GameActionsTypes } from "../../contexts/GameActions";
 
 type PlayerDeckProps = {
-  closeDeck: () => void;
+  closeDeck?: () => void;
 };
 
 export function PlayerDeck({ closeDeck }: PlayerDeckProps) {
