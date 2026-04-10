@@ -1,0 +1,19 @@
+.btn-shop{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgb(7, 111, 52);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 20%;
+    right: 12px;
+    font-size: 32px;
+    color: #fff;
+}
+.btn-shop:hover{
+    opacity: .8;
+    background: rgb(7, 111, 52);
+    color: #fff;
+}

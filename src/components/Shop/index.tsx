@@ -7,7 +7,7 @@ import { Button } from "../Button";
 import { CardDino } from "../CardDino";
 import { PlayerDeck } from "../PlayerDeck";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faLayerGroup } from "@fortawesome/free-solid-svg-icons";
+import {faCartPlus, faLayerGroup } from "@fortawesome/free-solid-svg-icons";
 
 import style from "./style.module.css";
 
@@ -24,6 +24,7 @@ export function Shop() {
     <>
     <div className="row">
       <div className="col-12 col-lg-4">
+        
       </div>
       <div className="col-12 col-lg-4">
         <div className="text-center">
@@ -45,10 +46,9 @@ export function Shop() {
             <div className="text-center">
               {state.player.money >= card.cost && state.player.deck.length < state.maxCardsInDeck &&  (<Button
                 type="button"
-                text={`Buy: ${card.cost}`}
                 className="btn btn--green mt-2"
                 onClick={() =>buyCard(card)}
-              />)}
+              >Buy: ${card.cost}</Button>)}
             </div>
           </div>
           )
@@ -64,6 +64,10 @@ export function Shop() {
       </button>
 
       {showDeck && <PlayerDeck closeDeck={() => setShowDeck(false)} />}
+
+      <Button type="button" className="btn btn-shop" onClick={() => console.log('ahahahah')}>
+          <FontAwesomeIcon icon={faCartPlus} />
+      </Button>
     </>
   );
 }
