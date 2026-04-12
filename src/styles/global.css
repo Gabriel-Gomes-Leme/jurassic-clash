@@ -18,10 +18,11 @@ body{
 }
 
 .btn{
-    padding: 12px 24px;
+    padding: 24px 48px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    font-size: 22px;
 }
 
 .btn--green{

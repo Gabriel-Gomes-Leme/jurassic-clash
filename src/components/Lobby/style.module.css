@@ -15,8 +15,8 @@
 }
 .deckCount{
     padding: 8px;
-    color: var(--red, #f00);
-    font-size: 13px;
+    color: var(--red, rgb(15, 98, 73));
+    font-size: 15px;
 }
 
 .overlay{

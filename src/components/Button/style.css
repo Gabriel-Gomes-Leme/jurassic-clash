@@ -3,11 +3,12 @@
     height: 100px;
     border-radius: 50%;
     background: rgb(7, 111, 52);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
-    bottom: 20%;
+    bottom: 16%;
     right: 12px;
     font-size: 32px;
     color: #fff;

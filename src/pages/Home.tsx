@@ -2,7 +2,7 @@ import { Container } from "../components/Container";
 import { Form } from "../components/Form";
 import { useGameContext } from "../contexts/useGameContext";
 import { Heading } from "../components/Heading";
-import { Shop } from "../components/Shop";
+import { Lobby } from "../components/Lobby";
 import { DinoCash } from "../components/DinoCash";
 import { Battle } from "../components/Battle";
 import { Winner } from "../components/Winner";
@@ -17,7 +17,7 @@ export function Home() {
     <Container>
       {state.step === 'start' && <Form />}
 
-      {state.step == 'shop' && <Shop /> }
+      {state.step == 'shop' && <Lobby /> }
     </Container>
     <Container type="fluid">
       {state.step == 'battle' && <Battle /> }

@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { CardModel } from "../../models/CardModel";
-import styles from "./style.module.css";
+import style from "./style.module.css";
 import { faBolt, faInfo, faPhotoFilm, faShield } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons/faHeart";
 import { useState } from "react";
 
 type cardProps = {
   card: CardModel;
-  type: "player" | "shop";
+  type?: "cardArena" | "shop" | "battle";
 };
 
 const borderColors = {
@@ -18,9 +18,16 @@ const borderColors = {
 };
 
 const titleSize = {
-  player: "0.9rem",
+  cardArena: "0.9rem",
   shop: "1.2rem",
+  battle: "0.9rem"
 };
+
+const customStyle = {
+  battle: style.cardBattle,
+  shop: style.cardShop,
+  cardArena: style.cardArena
+}
 
 export function CardDino({ card, type }: cardProps) {
   const [fliped, setFliped] = useState(false);
@@ -28,14 +35,14 @@ export function CardDino({ card, type }: cardProps) {
     <div
       aria-label={card.name}
       title={card.name}
-      className={`${styles.cardDino} ${fliped ? styles.fliped : ""}`}
+      className={`${style.cardDino} ${fliped ? style.fliped : ""} ${type && customStyle[type]}`}
       key={card.id}
     >
-      <span className={styles.cardIconInfo} onClick={() => setFliped(!fliped)}>
+      <span className={style.cardIconInfo} onClick={() => setFliped(!fliped)}>
         <FontAwesomeIcon icon={!fliped ? faInfo : faPhotoFilm}></FontAwesomeIcon>
       </span>
       <div
-        className={`${styles.cardFace} ${styles.cardFront}`}
+        className={`${style.cardFace} ${style.cardFront}`}
         style={{
           border: `6px solid ${borderColors[card.rarity]}`,
           backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.5) 51%, rgba(0,0,0,1) 96%), url(${card.image})`,
@@ -45,15 +52,15 @@ export function CardDino({ card, type }: cardProps) {
           className="card__title fw-bold"
           style={{
             color: borderColors[card.rarity],
-            fontSize: titleSize[type],
+            fontSize: type && titleSize[type],
           }}
         >
           {card.name}
         </h2>
-        <div className={styles.cardStats}>
+        <div className={style.cardStats}>
           <span
             title="Ataque"
-            className={styles.cardStat}
+            className={style.cardStat}
             style={{ "--color": "#af0b0b" } as React.CSSProperties}
           >
             <FontAwesomeIcon
@@ -64,7 +71,7 @@ export function CardDino({ card, type }: cardProps) {
           </span>
           <span
             title="Vida"
-            className={styles.cardStat}
+            className={style.cardStat}
             style={{ "--color": "#49c26f" } as React.CSSProperties}
           >
             <FontAwesomeIcon aria-label="Vida" icon={faHeart}></FontAwesomeIcon>{" "}
@@ -73,7 +80,7 @@ export function CardDino({ card, type }: cardProps) {
           <span
             aria-label="Defesa"
             title="Defesa"
-            className={styles.cardStat}
+            className={style.cardStat}
             style={{ "--color": "#41a6e0" } as React.CSSProperties}
           >
             <FontAwesomeIcon
@@ -85,7 +92,7 @@ export function CardDino({ card, type }: cardProps) {
         </div>
       </div>
       <div
-        className={`${styles.cardFace} ${styles.cardBack}`}
+        className={`${style.cardFace} ${style.cardBack}`}
         style={{ border: `6px solid ${borderColors[card.rarity]}` }}
       >
         {card.description != "" && (
