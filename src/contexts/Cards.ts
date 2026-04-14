@@ -303,10 +303,24 @@ export const Cards: CardModel[] = [
     defense: 55,
     hp: 95,
     maxHp: 95,
-    cost: 80,
+    cost: 65,
+    type: "carnivore",
+    rarity: Rarity.RARE,
+    description:
+      "Predador bípedo do final do Cretáceo, conhecido pelos chifres sobre os olhos e pela mordida poderosa. Ágil e feroz, prefere emboscadas rápidas e golpes certeiros.",
+  },
+  {
+    id: 23,
+    name: "Purussaurus",
+    image: "/public/dino-deck/purussaurus.webp",
+    attack: 92,
+    defense: 60,
+    hp: 100,
+    maxHp: 100,
+    cost: 95,
     type: "carnivore",
     rarity: Rarity.EPIC,
     description:
-      "Predador bípedo do final do Cretáceo, conhecido pelos chifres sobre os olhos e pela mordida poderosa. Ágil e feroz, prefere emboscadas rápidas e golpes certeiros.",
+      "Crocodiliano gigante do Mioceno, com mordida esmagadora e corpo blindado. Resistente e brutal, domina combates de proximidade com força e resistência superiores.",
   },
 ];

@@ -255,7 +255,7 @@ export function Battle() {
                 )}
             </div>
           </div>
-          {/* <div className="col-12 col-md-4">
+          <div className="col-12 col-md-4">
             <div className={style.battleDeck}>
               <h2 className="light">CPU Deck</h2>
               <div className="row">
@@ -268,7 +268,7 @@ export function Battle() {
                 })}
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </>

@@ -7,7 +7,7 @@ import { useState } from "react";
 
 type cardProps = {
   card: CardModel;
-  type?: "cardArena" | "shop" | "battle";
+  type?: "cardArena" | "shop" | "battle" | "cpuDeck";
 };
 
 const borderColors = {
@@ -20,13 +20,15 @@ const borderColors = {
 const titleSize = {
   cardArena: "0.9rem",
   shop: "1.2rem",
-  battle: "0.9rem"
+  battle: "0.9rem",
+  cpuDeck: '0rem'
 };
 
 const customStyle = {
   battle: style.cardBattle,
   shop: style.cardShop,
-  cardArena: style.cardArena
+  cardArena: style.cardArena,
+  cpuDeck: style.cardCpuDeck
 }
 
 export function CardDino({ card, type }: cardProps) {
@@ -38,7 +40,9 @@ export function CardDino({ card, type }: cardProps) {
       className={`${style.cardDino} ${fliped ? style.fliped : ""} ${type && customStyle[type]}`}
       key={card.id}
     >
-      <span className={style.cardIconInfo} onClick={() => setFliped(!fliped)}>
+      {type != "cpuDeck" && (
+        <>
+        <span className={style.cardIconInfo} onClick={() => setFliped(!fliped)}>
         <FontAwesomeIcon icon={!fliped ? faInfo : faPhotoFilm}></FontAwesomeIcon>
       </span>
       <div
@@ -101,6 +105,8 @@ export function CardDino({ card, type }: cardProps) {
           </p>
         )}
       </div>
+        </>
+      )}
     </div>
   );
 }

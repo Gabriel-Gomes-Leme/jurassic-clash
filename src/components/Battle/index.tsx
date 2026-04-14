@@ -13,7 +13,6 @@ export function Battle() {
 
   const cpuTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-
   function generateCpuDeck(avaliableCards: CardModel[], maxCards: number) {
     const shuffled = [...avaliableCards].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, maxCards);
@@ -167,92 +166,111 @@ export function Battle() {
 
   return (
     <>
-      <div className="py-5">
-        <h2 className="light text-center">{state.battle.arena.turn} turn</h2>
-        
-            <div className="row justify-content-center battleCamp">
-              <div className="col-12 col-md-4">
-                <div className={style.cardSelected}>
-                {state.battle.arena.playerSelectedCard ? (
-                  <>
-                    <CardDino
-                      card={state.battle.arena.playerSelectedCard}
-                      type="cardArena"
-                    />
-                    <div className={style.cardLife}>
-                      <div
-                        className={style.cardLifeBar}
-                        style={{
-                          height: `${(state.battle.arena.playerSelectedCard.hp / state.battle.arena.playerSelectedCard.maxHp) * 100}%`,
-                        }}
-                      ></div>
-                    </div>
-                  </>
-                ) : (
-                  <div className="emptyCard">Selecione uma carta</div>
-                )}
-              </div>
-              </div>
-              <div className="col-12 col-md-2">
-                <h2 className="light text-center my-5">VS</h2>
-                {state.battle.arena.playerSelectedCard &&
-                state.battle.arena.cpuSelectedCard && (
-                  <div className="row mt-3">
-                    <div className="col-12 text-center">
-                      <button
-                        className="btn btn-primary"
-                        onClick={() =>
-                          handleStartFight(
-                            state.battle.arena.playerSelectedCard,
-                            state.battle.arena.cpuSelectedCard,
-                          )
-                        }
-                      >
-                        Iniciar Batalha
-                      </button>
-                    </div>
+      <div className={`py-5 ${style.battleCamp}`}>
+        <div className="d-flex justify-content-end">
+          <div className={style.cpuDeck}>
+            <h2 className="light fs-14">CPU Deck</h2>
+            <div className="row">
+              {state.battle.cpuDeck.map((card, index) => {
+                return (
+                  <div className="col-6 col-md-3 py-2 m-0">
+                    <CardDino card={card} type="cpuDeck" key={index} />
                   </div>
-                )}
-              </div>
-              <div className="col-12 col-md-4">
-                <div className={style.cardSelected}>
-                {state.battle.arena.cpuSelectedCard ? (
-                  <>
-                    <CardDino
-                      card={state.battle.arena.cpuSelectedCard}
-                      type="cardArena"
-                    />
-                    <div className={style.cardLife}>
-                      <div
-                        className={style.cardLifeBar}
-                        style={{
-                          height: `${(state.battle.arena.cpuSelectedCard.hp / state.battle.arena.cpuSelectedCard.maxHp) * 100}%`,
-                        }}
-                      ></div>
-                    </div>
-                  </>
-                ) : (
-                  <div className="emptyCard">Aguardando CPU</div>
-                )}
-              </div>
-              </div>
-              
+                );
+              })}
             </div>
-        </div>
-        <div className={style.battleDeck}>
-          <h2 className="light">{state.player.name} Deck</h2>
-          <div className="row">
-            {state.player.deck.map((card, index) => {
-              return (
-                <div className="col-12 col-md-3 py-2 m-0">
-                  <div onClick={() => handlePlayerSelectCard(card)}>
-                    <CardDino card={card} type="battle" key={index} />
-                  </div>
-                </div>
-              );
-            })}
           </div>
         </div>
+        <h2 className="light text-center title=primary">
+          {state.battle.arena.turn} turn
+        </h2>
+
+        <div className="row justify-content-center battleCamp">
+          <div className="col-12 col-md-4">
+            <div className={style.cardSelected}>
+              {state.battle.arena.playerSelectedCard ? (
+                <>
+                  <CardDino
+                    card={state.battle.arena.playerSelectedCard}
+                    type="cardArena"
+                  />
+                  <div className={style.cardLife}>
+                    <div
+                      className={style.cardLifeBar}
+                      style={{
+                        height: `${(state.battle.arena.playerSelectedCard.hp / state.battle.arena.playerSelectedCard.maxHp) * 100}%`,
+                      }}
+                    ></div>
+                  </div>
+                </>
+              ) : (
+                <div className="emptyCard text-center light">
+                  Selecione uma carta
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="col-12 col-md-2">
+            <h2 className="light text-center my-5">VS</h2>
+            {state.battle.arena.playerSelectedCard &&
+              state.battle.arena.cpuSelectedCard && (
+                <div className="row mt-3">
+                  <div className="col-12 text-center">
+                    <button
+                      className="btn btn-primary"
+                      onClick={() =>
+                        handleStartFight(
+                          state.battle.arena.playerSelectedCard,
+                          state.battle.arena.cpuSelectedCard,
+                        )
+                      }
+                    >
+                      Iniciar Batalha
+                    </button>
+                  </div>
+                </div>
+              )}
+          </div>
+          <div className="col-12 col-md-4">
+            <div className={style.cardSelected}>
+              {state.battle.arena.cpuSelectedCard ? (
+                <>
+                  <CardDino
+                    card={state.battle.arena.cpuSelectedCard}
+                    type="cardArena"
+                  />
+                  <div className={style.cardLife}>
+                    <div
+                      className={style.cardLifeBar}
+                      style={{
+                        height: `${(state.battle.arena.cpuSelectedCard.hp / state.battle.arena.cpuSelectedCard.maxHp) * 100}%`,
+                      }}
+                    ></div>
+                  </div>
+                </>
+              ) : (
+                <div className="emptyCard text-center light">
+                  Aguardando CPU
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={style.battleDeck}>
+        <h2 className="light">{state.player.name} Deck</h2>
+        <div className="row">
+          {state.player.deck.map((card, index) => {
+            return (
+              <div className="col-12 col-md-3 py-2 m-0">
+                <div onClick={() => handlePlayerSelectCard(card)}>
+                  <CardDino card={card} type="battle" key={index} />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </>
   );
 }

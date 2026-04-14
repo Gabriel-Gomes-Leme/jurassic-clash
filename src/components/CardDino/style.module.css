@@ -94,6 +94,12 @@
     height: 160px;
 }
 
+.cardCpuDeck{
+    height: 60px;
+    background: url(../../../public/hero/textura-dino.webp);
+    pointer-events: none;
+}
+
 @media (max-width: 576px){
     .cardStats{
         display: flex;

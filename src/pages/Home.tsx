@@ -14,14 +14,14 @@ export function Home() {
   return (
     <>
     <Heading />
-    <Container>
-      {state.step === 'start' && <Form />}
+    
+      {state.step === 'start' &&  <Container><Form /> </Container>}
 
-      {state.step == 'shop' && <Lobby /> }
-    </Container>
-    <Container type="fluid">
-      {state.step == 'battle' && <Battle /> }
-    </Container>
+      {state.step == 'shop' && <Container><Lobby /></Container> }
+    
+    
+      {state.step == 'battle' && <Container type="fluid"><Battle /> </Container>}
+    
     {state.step == 'end' && <Winner/>}
     <DinoCash />
     </>
