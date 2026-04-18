@@ -8,6 +8,7 @@ export type GameModel = {
     player : PlayerModel,
     avaliableCards: CardModel[],
     battle:{
+        isFighting: true | false,
         playerDeck: PlayerModel['deck'],
         cpuDeck: PlayerModel['deck'],
         round: number,

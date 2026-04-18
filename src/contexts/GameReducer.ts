@@ -119,11 +119,26 @@ export function GameReducer(
         },
         battle: {
           ...state.battle,
+          isFighting: true,
           arena: {
             ...state.battle.arena,
             playerSelectedCard: action.payload.playerCard,
             cpuSelectedCard: action.payload.cpuCard,
             turn: action.payload.turn,
+          },
+        },
+      };
+    };
+    case 'APPLY_DAMAGE':{
+      return {
+        ...state,
+        player: {
+          ...state.player,
+        },
+        battle: {
+          ...state.battle,
+          arena: {
+            ...state.battle.arena,
           },
         },
       };
