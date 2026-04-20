@@ -38,7 +38,7 @@ export function Lobby() {
               Iniciar Jogo
             </Button>
             )}
-            <Button title="Comprar carta" ariaLabel="Comprar carta" type="button" onClick={() => handleModal("shop")} className="btn btn-secondary my-3">
+            <Button title="Comprar carta" ariaLabel="Comprar carta" type="button" onClick={() => handleModal("shop")} className="btn btn-shop my-3">
               <FontAwesomeIcon icon={faCartPlus} /> Loja de Cartas
             </Button>
             <Button title="Mostrar deck" ariaLabel="Mostrar deck" type="button" onClick={() => handleModal("deck")} className="btn btn-light my-3">

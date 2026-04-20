@@ -67,60 +67,15 @@ export function Battle() {
     }
   }
 
-  function updateDamageCard(card: CardModel, damage: number): CardModel {
-    if (card.hp <= 0) {
-      return card;
-    }
-    const newHp = Math.max(0, card.hp - damage);
-    return {
-      ...card,
-      hp: newHp,
-    };
-  }
-
-  // Funçao que calcula os scores de cada jogador
-  function handleScore(updateCpuCard: CardModel, updatePlayerCard: CardModel) {
-    const playerWon = updateCpuCard.hp <= 0;
-    const cpuWon = updatePlayerCard.hp <= 0;
-    dispatch({
-      type: GameActionsTypes.SET_SCORE,
-      payload: {
-        playerWon: playerWon,
-        cpuWon: cpuWon,
-      },
-    });
-  }
   function handleStartFight(
     playerCard: CardModel | null,
     cpuCard: CardModel | null,
   ) {
     if (playerCard && cpuCard) {
-      const cpuDamage = Math.max(
-        0,
-        playerCard.attack * (1 - cpuCard.defense / 100),
-      );
-      const playerDamage = Math.max(
-        0,
-        cpuCard.attack * (1 - playerCard.defense / 100),
-      );
-
-      const updateCpuCard = updateDamageCard(cpuCard, cpuDamage);
-      const updatePlayerCard = updateDamageCard(playerCard, playerDamage);
-
       dispatch({
         type: GameActionsTypes.START_BATTLE,
-        payload: {
-          playerCard: updatePlayerCard.hp > 0 ? updatePlayerCard : null,
-          cpuCard: updateCpuCard.hp > 0 ? updateCpuCard : null,
-          turn:
-            updateCpuCard.hp > 0 && updatePlayerCard.hp <= 0
-              ? state.player.name
-              : "cpu",
-        },
+        payload: { playerCard, cpuCard, turn: state.player.name },
       });
-
-      // Define os scores de cada jogador
-      handleScore(updateCpuCard, updatePlayerCard);
     }
   }
 
@@ -131,38 +86,59 @@ export function Battle() {
     });
   }
 
+  // watcher para a cpu selecionar carta
   useEffect(() => {
     if (
       !state.battle.arena.cpuSelectedCard &&
-      state.battle.cpuDeck.length > 0 &&
-      state.battle.arena.turn === "cpu"
+      state.battle.cpuDeck.length > 0
     ) {
       handleCpuSelectCard();
     }
   }, [
     state.battle.arena.cpuSelectedCard,
-    state.battle.arena.turn,
     state.battle.cpuDeck.length,
   ]);
+
+  // watcher para criar o deck da cpu
 
   useEffect(() => {
     handleCpuDeck(state.maxCardsInDeck);
   }, []);
 
+  // watcher para o combate
+  useEffect(() => {
+    if (
+      !state.battle.isFighting ||
+      !state.battle.arena.playerSelectedCard ||
+      !state.battle.arena.cpuSelectedCard
+    )
+      return;
+
+    if (
+      state.battle.arena.cpuSelectedCard &&
+      state.battle.arena.playerSelectedCard &&
+      state.battle.isFighting
+    ) {
+      const interval = setInterval(() => {
+        dispatch({ type: GameActionsTypes.APPLY_DAMAGE });
+      }, 1000); // 1 segundo por ataque
+      return () => clearInterval(interval);
+    }
+
+  }, [state.battle.isFighting]);
+
+  // watcher para definir o vencedor
   useEffect(() => {
     if (state.battle.winner) {
       return;
     }
     if (state.battle.cpuScore >= 4) {
       handleWinner("cpu");
-      console.log("cpuScore: " + state.battle.cpuScore);
     }
     if (state.battle.playerScore >= 4) {
       handleWinner(state.player.name);
-      console.log("playerScore: " + state.battle.playerScore);
     }
   }, [state.battle.cpuScore, state.battle.playerScore, state.battle.winner]);
-  console.log("vencedor:" + state.battle.winner);
 
   return (
     <>
@@ -213,7 +189,7 @@ export function Battle() {
           <div className="col-12 col-md-2">
             <h2 className="light text-center my-5">VS</h2>
             {state.battle.arena.playerSelectedCard &&
-              state.battle.arena.cpuSelectedCard && (
+              state.battle.arena.cpuSelectedCard && !state.battle.isFighting && (
                 <div className="row mt-3">
                   <div className="col-12 text-center">
                     <button

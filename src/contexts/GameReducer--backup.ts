@@ -69,10 +69,10 @@ export function GameReducer(
           ...state.battle,
           playerDeck: state.player.deck,
           round: 1,
-          arena: {
+          arena:{
             ...state.battle.arena,
             turn: state.player.name,
-          },
+          }
         },
       };
     case "PLAYER_SELECT_CARD":
@@ -128,27 +128,8 @@ export function GameReducer(
           },
         },
       };
-    }
-    case "APPLY_DAMAGE": {
-      const cpu = state.battle.arena.cpuSelectedCard;
-      const player = state.battle.arena.playerSelectedCard;
-
-      if (!player || !cpu) {
-        return state;
-      }
-      const cpuDamage = Math.max(0, player.attack * (1 - cpu.defense / 100));
-      const playerDamage = Math.max(0, cpu.attack * (1 - player.defense / 100));
-
-      const updateCpu = {
-        ...cpu,
-        hp: Math.max(0, cpu.hp - cpuDamage),
-      };
-      const updatePlayer = {
-        ...player,
-        hp: Math.max(0, player.hp - playerDamage),
-      };
-      const playerJustWon = cpu.hp > 0 && updateCpu.hp === 0;
-      const cpuJustWon = player.hp > 0 && updatePlayer.hp === 0;
+    };
+    case 'APPLY_DAMAGE':{
       return {
         ...state,
         player: {
@@ -156,32 +137,45 @@ export function GameReducer(
         },
         battle: {
           ...state.battle,
-          playerScore: state.battle.playerScore + (playerJustWon ? 1 : 0),
-          cpuScore: state.battle.cpuScore + (cpuJustWon ? 1 : 0),
           arena: {
             ...state.battle.arena,
-            playerSelectedCard: updatePlayer.hp > 0 ? updatePlayer : null,
-            cpuSelectedCard: updateCpu.hp > 0 ? updateCpu : null,
+            playerSelectedCard: action.payload.playerCard,
+            cpuSelectedCard: action.payload.cpuCard,
           },
-          isFighting: updateCpu.hp > 0 && updatePlayer.hp > 0 ? true : false,
         },
       };
-    }
-    case "FINISH_BATTLE": {
-      return {
+    };
+    case "SET_SCORE": {
+      return{
         ...state,
-        step: "end",
-        player: {
+        player:{
           ...state.player,
         },
-        battle: {
+        battle:{
+          ...state.battle,
+          playerScore : state.battle.playerScore + (action.payload.playerWon ? 1 : 0),
+          cpuScore: state.battle.cpuScore + (action.payload.cpuWon ? 1 : 0),
+          arena:{
+            ...state.battle.arena,
+          }
+        },
+      }
+    };
+    case "FINISH_BATTLE": {
+      return{
+        ...state,
+        step: 'end',
+        player:{
+          ...state.player,
+        },
+        battle:{
           ...state.battle,
           winner: action.payload.winner,
-          arena: {
+          arena:{
             ...state.battle.arena,
-          },
+          }
         },
-      };
+      }
     }
   }
 
