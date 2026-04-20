@@ -13,14 +13,15 @@ export function Battle() {
 
   const cpuTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  function generateCpuDeck(avaliableCards: CardModel[], maxCards: number) {
+  function generateCpuDeck(avaliableCards: CardModel[], maxCards: number, cpuMoney: number) {
+    console.log(cpuMoney)
     const shuffled = [...avaliableCards].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, maxCards);
   }
 
   function handleCpuDeck(maxCards: number) {
     if (state.battle.cpuDeck.length === 0) {
-      const cpuDeck = generateCpuDeck(avaliableCards, maxCards);
+      const cpuDeck = generateCpuDeck(avaliableCards, maxCards, state.initialCpuMoney);
       dispatch({
         type: GameActionsTypes.SET_CPU_DECK,
         payload: { deck: cpuDeck },

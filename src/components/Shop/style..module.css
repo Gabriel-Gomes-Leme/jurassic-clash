@@ -1,0 +1,8 @@
+.shopFilter{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 100%;
+    max-width: 200px;
+    padding: 16px;
+}

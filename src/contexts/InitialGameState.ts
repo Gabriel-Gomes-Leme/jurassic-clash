@@ -4,7 +4,8 @@ import { Cards } from "./Cards";
 export const InitialGameState : GameModel = {
     step: 'start',
     maxCardsInDeck: 4,
-    initialMoney: 340,
+    initialMoney: 300,
+    initialCpuMoney: 380,
     avaliableCards: Cards,
     player : {
         name: '',

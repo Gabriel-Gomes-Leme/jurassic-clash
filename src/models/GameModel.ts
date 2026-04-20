@@ -5,6 +5,7 @@ export type GameModel = {
     step: 'start' | 'shop' | 'battle' | 'end',
     maxCardsInDeck: number,
     initialMoney: number,
+    initialCpuMoney: number,
     player : PlayerModel,
     avaliableCards: CardModel[],
     battle:{

@@ -21,6 +21,7 @@
 }
 
 .modalBody{
+    position: relative;
     width: 100%;
     padding: 24px;
      background: linear-gradient(
@@ -40,8 +41,8 @@
     width: 44px;
     height: 44px;
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 0;
+    right: 0;
     background-color: var(--red, #ff0000);
     color: var(--light, #fff);
     border: 0;

@@ -32,16 +32,16 @@ export function Lobby() {
       <div className="row">
         <div className="col-12 col-lg-4"></div>
         <div className="col-12 col-lg-4">
-          <div className="text-center">
+          <div className={`${style.menuLobby} text-center`}>
             {state.player.deck.length > state.maxCardsInDeck - 1 && (
-            <Button title="Iniciar jogo" ariaLabel="Iniciar jogo" type="button" onClick={() => handleStartGame()} className="btn btn-primary my-3">
+            <Button title="Iniciar jogo" ariaLabel="Iniciar jogo" type="button" onClick={() => handleStartGame()} className="btn btn-game my-3" style={{ '--background': 'linear-gradient(145deg, #0765e9, #0765e9)' } as React.CSSProperties}>
               Iniciar Jogo
             </Button>
             )}
-            <Button title="Comprar carta" ariaLabel="Comprar carta" type="button" onClick={() => handleModal("shop")} className="btn btn-shop my-3">
+            <Button title="Comprar carta" ariaLabel="Comprar carta" type="button" onClick={() => handleModal("shop")} className="btn btn-game my-3" style={{ '--background': 'linear-gradient(145deg, #1e6b3a, #0f3d22)' } as React.CSSProperties}>
               <FontAwesomeIcon icon={faCartPlus} /> Loja de Cartas
             </Button>
-            <Button title="Mostrar deck" ariaLabel="Mostrar deck" type="button" onClick={() => handleModal("deck")} className="btn btn-light my-3">
+            <Button title="Mostrar deck" ariaLabel="Mostrar deck" type="button" onClick={() => handleModal("deck")} className="btn btn-game my-3" style={{ '--background': 'linear-gradient(145deg, #535f73, #53525c)' } as React.CSSProperties}>
                Deck <span className={style.deckCount}>
           {state.player.deck.length} / {state.maxCardsInDeck}
         </span>
