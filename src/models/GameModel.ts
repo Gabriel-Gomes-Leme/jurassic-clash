@@ -1,8 +1,10 @@
 import type { PlayerModel } from "../models/PlayerModel"
 import type { CardModel } from "./CardModel"
 
+export type stepOptions = 'start' | 'shop' | 'battle' | 'end'
+
 export type GameModel = {
-    step: 'start' | 'shop' | 'battle' | 'end',
+    step: stepOptions,
     maxCardsInDeck: number,
     initialMoney: number,
     initialCpuMoney: number,

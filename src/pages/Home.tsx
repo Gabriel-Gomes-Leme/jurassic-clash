@@ -13,9 +13,8 @@ export function Home() {
 
   return (
     <>
-    <Heading />
     
-      {state.step === 'start' &&  <Container><Form /> </Container>}
+      {state.step === 'start' && <><Heading /> <Container><Form /> </Container></>}
 
       {state.step == 'shop' && <Container><Lobby /></Container> }
     

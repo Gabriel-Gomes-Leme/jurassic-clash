@@ -3,9 +3,11 @@
     bottom: 12px;
     right: 12px;
     padding: 12px;
-    background-color: var(--primary-color, #654828);
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border: 8px solid var(--primary-color, #71691b);
+    background-color: var(--tertiary-color-dark, #654828);
+    box-shadow: 
+    0 4px 0 #0a2a17,
+    0 6px 15px rgba(0,0,0,0.6),
+    inset 0 0 10px rgba(0, 0, 0, 0.6);
     border-radius: 16px;
     font-size: 24px;
     color: white;

@@ -34,7 +34,8 @@ const customStyle = {
 export function CardDino({ card, type }: cardProps) {
   const [fliped, setFliped] = useState(false);
   return (
-    <div
+    <div className={style.cardWrapp}>
+      <div
       aria-label={card.name}
       title={card.name}
       className={`${style.cardDino} ${fliped ? style.fliped : ""} ${type && customStyle[type]}`}
@@ -48,7 +49,7 @@ export function CardDino({ card, type }: cardProps) {
       <div
         className={`${style.cardFace} ${style.cardFront}`}
         style={{
-          border: `6px solid ${borderColors[card.rarity]}`,
+          border: `3px solid ${borderColors[card.rarity]}`,
           backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.5) 51%, rgba(0,0,0,1) 96%), url(${card.image})`,
         }}
       >
@@ -107,6 +108,7 @@ export function CardDino({ card, type }: cardProps) {
       </div>
         </>
       )}
+    </div>
     </div>
   );
 }

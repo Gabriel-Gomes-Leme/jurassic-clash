@@ -1,4 +1,5 @@
 import type { CardModel } from "../models/CardModel"
+import type {stepOptions } from "../models/GameModel"
 
 export enum GameActionsTypes {
     SET_PLAYER_NAME = 'SET_PLAYER_NAME',
@@ -11,7 +12,9 @@ export enum GameActionsTypes {
     CPU_SELECT_CARD = 'CPU_SELECT_CARD',
     START_BATTLE = 'START_BATTLE',
     APPLY_DAMAGE = 'APPLY_DAMAGE',
-    FINISH_BATTLE = 'FINISH_BATTLE'
+    FINISH_BATTLE = 'FINISH_BATTLE',
+    NEXT_STEP = 'NEXT_STEP',
+    RESET_GAME = 'RESET_GAME'
 }
 
 export type GameActionModels = |{
@@ -55,4 +58,11 @@ export type GameActionModels = |{
     | {
         type: GameActionsTypes.FINISH_BATTLE,
         payload : {winner: string}
+    }
+    | {
+        type: GameActionsTypes.NEXT_STEP,
+        payload : {step: stepOptions}
+    }
+      | {
+        type: GameActionsTypes.RESET_GAME,
     }

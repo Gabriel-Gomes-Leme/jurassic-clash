@@ -7,8 +7,42 @@ body{
     width: 100%;
     height: 100%;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 55%, rgba(0, 0, 0, 0.4) 60%), url(../../public/hero/jurassic-bg.webp);
-    font-family: 'Archivo Black', sans-serif;
+    font-family: 'Passero One', sans-serif;
 }
+
+/* Scrollbar geral */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Fundo (trilho) */
+::-webkit-scrollbar-track {
+  background: var(--tertiary-color);
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+}
+
+/* Parte que você arrasta */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    var(--tertiary-color-medium),   /* verde selva */
+    var(--primary-color)    /* verde escuro */
+  );
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(63, 175, 108, 0.4);
+}
+
+/* Hover */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    #4CD47F,
+    #24543A
+  );
+  box-shadow: 0 0 12px rgba(76, 212, 127, 0.7);
+}
+
 .title-1{
     font-size: 2.65rem;
     color: var(--light, #fefefe);

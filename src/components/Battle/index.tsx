@@ -102,9 +102,11 @@ export function Battle() {
 
   // watcher para criar o deck da cpu
 
-  useEffect(() => {
+useEffect(() => {
+  if (state.battle.cpuDeck.length === 0 && state.step === "battle") {
     handleCpuDeck(state.maxCardsInDeck);
-  }, []);
+  }
+}, [state.step]);
 
   // watcher para o combate
   useEffect(() => {
@@ -187,7 +189,7 @@ export function Battle() {
               )}
             </div>
           </div>
-          <div className="col-12 col-md-2">
+          <div className="col-12 col-md-3">
             <h2 className="light text-center my-5">VS</h2>
             {state.battle.arena.playerSelectedCard &&
               state.battle.arena.cpuSelectedCard && !state.battle.isFighting && (
@@ -235,7 +237,7 @@ export function Battle() {
         </div>
       </div>
       <div className={style.battleDeck}>
-        <h2 className="light">{state.player.name} Deck</h2>
+        <h2 className="light fs-14">{state.player.name} Deck</h2>
         <div className="row">
           {state.player.deck.map((card, index) => {
             return (

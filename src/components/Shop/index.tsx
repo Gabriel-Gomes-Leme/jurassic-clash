@@ -44,7 +44,7 @@ export function Shop(){
     return(
         <>
         <h2 className="light text-center">Loja de Cartas</h2>
-        <div className={`${style.shopFilter} d-flex justify-content-end align-items-center`}>
+        <div className={`${style.shopFilter} d-flex justify-content-end align-items-center gap-2`}>
           <h3 className="fs-14 light text-center mt-0 mb-0">
             Filtros: 
           </h3>
@@ -68,10 +68,10 @@ export function Shop(){
                     title="Comprar Carta"
                     ariaLabel="Comprar Carta"
                       type="button"
-                      className="btn btn--green btn--buy mt-2"
+                      className="btn-game btn--buy mt-1"
                       onClick={() => buyCard(card)}
                     >
-                      Buy: ${card.cost}
+                      <FontAwesomeIcon icon={faCoins}></FontAwesomeIcon> {card.cost}
                     </Button>
                   )}
               </div>

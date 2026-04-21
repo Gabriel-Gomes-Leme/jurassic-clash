@@ -1,5 +1,6 @@
 import type { GameModel } from "../models/GameModel";
 import type { GameActionModels } from "./GameActions";
+import { InitialGameState } from "./InitialGameState";
 
 export function GameReducer(
   state: GameModel,
@@ -182,6 +183,24 @@ export function GameReducer(
           },
         },
       };
+    }
+    case "NEXT_STEP": {
+      return {
+        ...state,
+        step: action.payload.step,
+        player: {
+          ...state.player,
+        },
+        battle: {
+          ...state.battle,
+          arena: {
+            ...state.battle.arena,
+          },
+        },
+      };
+    }
+    case "RESET_GAME": {
+      return InitialGameState;
     }
   }
 
