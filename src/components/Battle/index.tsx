@@ -239,7 +239,7 @@ useEffect(() => {
       <div className={style.battleDeck}>
         <h2 className="light fs-14">{state.player.name} Deck</h2>
         <div className="row">
-          {state.player.deck.map((card, index) => {
+          {state.battle.playerDeck.map((card, index) => {
             return (
               <div className="col-12 col-md-3 py-2 m-0">
                 <div onClick={() => handlePlayerSelectCard(card)}>

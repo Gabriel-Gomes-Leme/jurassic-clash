@@ -71,7 +71,8 @@ export function GameReducer(
           playerDeck: state.player.deck,
           round: 1,
           arena: {
-            ...state.battle.arena,
+            playerSelectedCard: null,
+            cpuSelectedCard: null,
             turn: state.player.name,
           },
         },
@@ -81,12 +82,15 @@ export function GameReducer(
         ...state,
         player: {
           ...state.player,
-          deck: state.player.deck.filter(
-            (card) => card.id !== action.payload.card?.id,
-          ),
+          // deck: state.player.deck.filter(
+          //   (card) => card.id !== action.payload.card?.id,
+          // ),
         },
         battle: {
           ...state.battle,
+          playerDeck: state.battle.playerDeck.filter(
+            (card) => card.id !== action.payload.card?.id,
+          ),
           arena: {
             ...state.battle.arena,
             turn: "cpu",
@@ -169,11 +173,13 @@ export function GameReducer(
       };
     }
     case "FINISH_BATTLE": {
+      const bonus = action.payload.winner == state.player.name ? 60 : 0
       return {
         ...state,
         step: "end",
         player: {
           ...state.player,
+          money: state.player.money + bonus
         },
         battle: {
           ...state.battle,
@@ -192,9 +198,15 @@ export function GameReducer(
           ...state.player,
         },
         battle: {
-          ...state.battle,
+          ...InitialGameState.battle,
+          playerScore: 0,
+          cpuScore: 0,
+          cpuDeck: [],
+          winner: null,
           arena: {
             ...state.battle.arena,
+            playerSelectedCard: null,
+            cpuSelectedCard: null,
           },
         },
       };

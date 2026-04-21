@@ -59,7 +59,7 @@ export type GameActionModels = |{
         type: GameActionsTypes.FINISH_BATTLE,
         payload : {winner: string}
     }
-    | {
+    |{
         type: GameActionsTypes.NEXT_STEP,
         payload : {step: stepOptions}
     }
