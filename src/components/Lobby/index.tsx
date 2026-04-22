@@ -3,7 +3,7 @@ import { useGameContext } from "../../contexts/useGameContext";
 import { Button } from "../Button";
 import { PlayerDeck } from "../PlayerDeck";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import {faCartPlus, faLayerGroup, faPlay, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import style from "./style.module.css";
 import { Modal } from "../Modal";
@@ -47,7 +47,7 @@ export function Lobby() {
                   } as React.CSSProperties
                 }
               >
-                Iniciar Jogo
+                <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon> Iniciar Jogo
               </Button>
             )}
             <Button
@@ -72,11 +72,11 @@ export function Lobby() {
               className="btn btn-game my-3 d-block"
               style={
                 {
-                  "--background": "linear-gradient(145deg, #535f73, #53525c)",
+                  "--background": "linear-gradient(145deg, var(--tertiary-color-dark), var(--tertiary-color-medium))",
                 } as React.CSSProperties
               }
             >
-              Deck
+              <FontAwesomeIcon icon={faLayerGroup}></FontAwesomeIcon> Deck
               <span className={style.deckCount}>
                 {state.player.deck.length} / {state.maxCardsInDeck}
               </span>
@@ -93,7 +93,7 @@ export function Lobby() {
                 } as React.CSSProperties
               }
             >
-              Excluir usuário
+             <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon> Excluir usuário
             </Button>
           </div>
         </div>

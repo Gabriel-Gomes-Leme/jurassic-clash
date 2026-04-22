@@ -5,6 +5,8 @@ import style from "./style.module.css";
 import "./style.module.css";
 import { GameActionsTypes } from "../../contexts/GameActions";
 import type { CardModel } from "../../models/CardModel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHandFist } from "@fortawesome/free-solid-svg-icons";
 
 export function Battle() {
   const { state, dispatch } = useGameContext();
@@ -13,15 +15,23 @@ export function Battle() {
 
   const cpuTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  function generateCpuDeck(avaliableCards: CardModel[], maxCards: number, cpuMoney: number) {
-    console.log(cpuMoney)
+  function generateCpuDeck(
+    avaliableCards: CardModel[],
+    maxCards: number,
+    cpuMoney: number,
+  ) {
+    console.log(cpuMoney);
     const shuffled = [...avaliableCards].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, maxCards);
   }
 
   function handleCpuDeck(maxCards: number) {
     if (state.battle.cpuDeck.length === 0) {
-      const cpuDeck = generateCpuDeck(avaliableCards, maxCards, state.initialCpuMoney);
+      const cpuDeck = generateCpuDeck(
+        avaliableCards,
+        maxCards,
+        state.initialCpuMoney,
+      );
       dispatch({
         type: GameActionsTypes.SET_CPU_DECK,
         payload: { deck: cpuDeck },
@@ -95,18 +105,15 @@ export function Battle() {
     ) {
       handleCpuSelectCard();
     }
-  }, [
-    state.battle.arena.cpuSelectedCard,
-    state.battle.cpuDeck.length,
-  ]);
+  }, [state.battle.arena.cpuSelectedCard, state.battle.cpuDeck.length]);
 
   // watcher para criar o deck da cpu
 
-useEffect(() => {
-  if (state.battle.cpuDeck.length === 0 && state.step === "battle") {
-    handleCpuDeck(state.maxCardsInDeck);
-  }
-}, [state.step]);
+  useEffect(() => {
+    if (state.battle.cpuDeck.length === 0 && state.step === "battle") {
+      handleCpuDeck(state.maxCardsInDeck);
+    }
+  }, [state.step]);
 
   // watcher para o combate
   useEffect(() => {
@@ -127,7 +134,6 @@ useEffect(() => {
       }, 1000); // 1 segundo por ataque
       return () => clearInterval(interval);
     }
-
   }, [state.battle.isFighting]);
 
   // watcher para definir o vencedor
@@ -146,7 +152,12 @@ useEffect(() => {
   return (
     <>
       <div className={`py-5 ${style.battleCamp}`}>
-        <div className="d-flex justify-content-end">
+       <div className="d-flex justify-content-center">
+         <h2 className={`light text-center title-primary ${style.turn}`}>
+          {state.battle.arena.turn} turn
+        </h2>
+       </div>
+        <div className="d-flex justify-content-end mb-5">
           <div className={style.cpuDeck}>
             <h2 className="light fs-14">CPU Deck</h2>
             <div className="row">
@@ -160,11 +171,8 @@ useEffect(() => {
             </div>
           </div>
         </div>
-        <h2 className="light text-center title=primary">
-          {state.battle.arena.turn} turn
-        </h2>
 
-        <div className="row justify-content-center battleCamp">
+        <div className="row justify-content-center battleCamp mt-3">
           <div className="col-12 col-md-4">
             <div className={style.cardSelected}>
               {state.battle.arena.playerSelectedCard ? (
@@ -192,18 +200,26 @@ useEffect(() => {
           <div className="col-12 col-md-3">
             <h2 className="light text-center my-5">VS</h2>
             {state.battle.arena.playerSelectedCard &&
-              state.battle.arena.cpuSelectedCard && !state.battle.isFighting && (
+              state.battle.arena.cpuSelectedCard &&
+              !state.battle.isFighting && (
                 <div className="row mt-3">
                   <div className="col-12 text-center">
                     <button
-                      className="btn btn-primary"
+                      className="btn btn-game"
                       onClick={() =>
                         handleStartFight(
                           state.battle.arena.playerSelectedCard,
                           state.battle.arena.cpuSelectedCard,
                         )
                       }
+                      style={
+                        {
+                          "--background":
+                            "linear-gradient(145deg, var(--secondary-color), var(--secondary-color-dark))",
+                        } as React.CSSProperties
+                      }
                     >
+                      <FontAwesomeIcon icon={faHandFist}></FontAwesomeIcon>{" "}
                       Iniciar Batalha
                     </button>
                   </div>
@@ -241,7 +257,7 @@ useEffect(() => {
         <div className="row">
           {state.battle.playerDeck.map((card, index) => {
             return (
-              <div className="col-12 col-md-3 py-2 m-0">
+              <div className="col-12 col-md-2 py-2 m-0">
                 <div onClick={() => handlePlayerSelectCard(card)}>
                   <CardDino card={card} type="battle" key={index} />
                 </div>

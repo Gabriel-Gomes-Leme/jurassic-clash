@@ -102,6 +102,9 @@ box-shadow:
 .cardBattle {
     height: 120px;
 }
+.cardBattle .cardIconInfo{
+    display: none;
+}
 
 .cardCpuDeck{
     height: 40px;

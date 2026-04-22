@@ -21,7 +21,7 @@ export function PlayerDeck() {
       <h2 className="light text-center playerDeckTitle">
         🦖 Deck de: {state.player.name}
       </h2>
-      <div className="row my-5">
+      <div className="row my-3">
         {state.player.deck.length > 0 &&
           state.player.deck.map((card) => {
             return (
@@ -38,13 +38,13 @@ export function PlayerDeck() {
                 >
                   <FontAwesomeIcon icon={faXmark} />
                 </button>
-                <CardDino type="player" card={card} />
+                <CardDino type="shop" card={card} />
               </div>
             );
           })}
       </div>
 
-      <div className="d-flex justify-content-center align-items-center my-3">
+      <div className="d-flex justify-content-center align-items-center my-1">
         {state.player.deck.length > 0 && (
           <button
             aria-label="Resetar Deck"
