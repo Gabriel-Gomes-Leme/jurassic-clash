@@ -25,6 +25,7 @@ export function Shop(){
     }
 
     function handleFilterType(type: 'rarity' | 'cost'){
+      
       setFilterType(type)
     }
 
@@ -48,10 +49,10 @@ export function Shop(){
           <h3 className="fs-14 light text-center mt-0 mb-0">
             Filtros: 
           </h3>
-          <Button type="button" className="btn btn-filter my-0 fs-14" title="Ordenar por preço" ariaLabel="Ordenar por preço" onClick={() => handleFilterType('cost')}>
+          <Button type="button" className={`btn btn-filter ${filterType == 'cost' && 'active'} my-0 fs-14`} title="Ordenar por preço" ariaLabel="Ordenar por preço" onClick={() => handleFilterType('cost')}>
             <FontAwesomeIcon icon={faCoins}></FontAwesomeIcon>
           </Button>
-          <Button type="button" className="btn btn-filter my-0 fs-14" title="Ordenar por raridade" ariaLabel="Ordenar por raridade" onClick={() => handleFilterType('rarity')}>
+          <Button type="button" className={`btn btn-filter ${filterType == 'rarity' && 'active'} my-0 fs-14`} title="Ordenar por raridade" ariaLabel="Ordenar por raridade" onClick={() => handleFilterType('rarity')}>
             <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
           </Button>
         </div>

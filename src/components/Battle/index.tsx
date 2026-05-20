@@ -6,7 +6,7 @@ import "./style.module.css";
 import { GameActionsTypes } from "../../contexts/GameActions";
 import type { CardModel } from "../../models/CardModel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHandFist } from "@fortawesome/free-solid-svg-icons";
+import { faHandFist, faExplosion } from "@fortawesome/free-solid-svg-icons";
 
 export function Battle() {
   const { state, dispatch } = useGameContext();
@@ -14,6 +14,7 @@ export function Battle() {
   const avaliableCards = state.avaliableCards;
 
   const cpuTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
 
   function generateCpuDeck(
     avaliableCards: CardModel[],
@@ -153,9 +154,9 @@ export function Battle() {
     <>
       <div className={`py-5 ${style.battleCamp}`}>
        <div className="d-flex justify-content-center">
-         <h2 className={`light text-center title-primary ${style.turn}`}>
-          {state.battle.arena.turn} turn
-        </h2>
+         {!state.battle.arena.cpuSelectedCard || !state.battle.arena.playerSelectedCard && <h2 className={`light text-center title-primary ${style.turn}`}>
+          turno de {state.battle.arena.turn}
+        </h2>}
        </div>
         <div className="d-flex justify-content-end mb-5">
           <div className={style.cpuDeck}>
@@ -185,7 +186,7 @@ export function Battle() {
                     <div
                       className={style.cardLifeBar}
                       style={{
-                        height: `${(state.battle.arena.playerSelectedCard.hp / state.battle.arena.playerSelectedCard.maxHp) * 100}%`,
+                        height: `${(state.battle.arena.playerSelectedCard.hp / state.battle.arena.playerSelectedCard.maxHp) * 100}%`, background: `${state.battle.arena.playerSelectedCard.hp >= (state.battle.arena.playerSelectedCard.maxHp / 2) ? '#24a524' : '#b31b00'}`
                       }}
                     ></div>
                   </div>
@@ -195,6 +196,10 @@ export function Battle() {
                   Selecione uma carta
                 </div>
               )}
+              {state.battle.arena.damageEffect.playerDamage && state.battle.isFighting ?
+               <div className={style.damageOverlay}>
+                <FontAwesomeIcon icon={faExplosion}></FontAwesomeIcon>
+               </div> : ''}
             </div>
           </div>
           <div className="col-12 col-md-3">
@@ -238,7 +243,7 @@ export function Battle() {
                     <div
                       className={style.cardLifeBar}
                       style={{
-                        height: `${(state.battle.arena.cpuSelectedCard.hp / state.battle.arena.cpuSelectedCard.maxHp) * 100}%`,
+                        height: `${(state.battle.arena.cpuSelectedCard.hp / state.battle.arena.cpuSelectedCard.maxHp) * 100}%`, background: `${state.battle.arena.cpuSelectedCard.hp >= (state.battle.arena.cpuSelectedCard.maxHp / 2) ? '#24a524' : '#b31b00'}`
                       }}
                     ></div>
                   </div>
@@ -248,6 +253,9 @@ export function Battle() {
                   Aguardando CPU
                 </div>
               )}
+              {state.battle.arena.damageEffect.cpuDamage && state.battle.isFighting ? <div className={style.damageOverlay}>
+                <FontAwesomeIcon icon={faExplosion}></FontAwesomeIcon>
+              </div> : ''}
             </div>
           </div>
         </div>

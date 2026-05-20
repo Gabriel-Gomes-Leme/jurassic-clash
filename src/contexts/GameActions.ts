@@ -12,6 +12,7 @@ export enum GameActionsTypes {
     CPU_SELECT_CARD = 'CPU_SELECT_CARD',
     START_BATTLE = 'START_BATTLE',
     APPLY_DAMAGE = 'APPLY_DAMAGE',
+    CLEAR_DAMAGE_EFFECT = 'CLEAR_DAMAGE_EFFECT',
     FINISH_BATTLE = 'FINISH_BATTLE',
     NEXT_STEP = 'NEXT_STEP',
     RESET_GAME = 'RESET_GAME'
@@ -65,4 +66,7 @@ export type GameActionModels = |{
     }
       | {
         type: GameActionsTypes.RESET_GAME,
+    }
+    |{
+        type: GameActionsTypes.CLEAR_DAMAGE_EFFECT,
     }

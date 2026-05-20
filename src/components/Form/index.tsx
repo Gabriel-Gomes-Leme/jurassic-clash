@@ -38,7 +38,8 @@ export function Form() {
         aria-label="Criar usuário"
         title="Criar usuário"
         type="submit"
-        className="btn btn--green"
+        className="btn btn-game"
+        style={{background: '#36865e'}}
       >
         Criar Usuário
       </button>

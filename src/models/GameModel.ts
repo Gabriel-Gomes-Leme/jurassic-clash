@@ -22,6 +22,10 @@ export type GameModel = {
             turn: PlayerModel['name'] | 'cpu',
             playerSelectedCard: CardModel | null,
             cpuSelectedCard: CardModel | null,
+            damageEffect:{
+                playerDamage: boolean | null,
+                cpuDamage: boolean | null
+            }
         }
     }
 }

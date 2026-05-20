@@ -48,6 +48,11 @@
     color: var(--white, #fff);
     opacity: .8;
 }
+.btn-filter.active{
+  background-color: var(--primary-color);
+  color: var(--light);
+  border-color: transparent;
+}
 
 .btn--buy{
     padding: 12px 16px;

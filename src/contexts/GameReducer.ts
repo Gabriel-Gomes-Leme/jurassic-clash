@@ -53,15 +53,21 @@ export function GameReducer(
           ),
         },
       };
-    case "RESET_DECK":
+    case "RESET_DECK": {
+      const deckMoney = state.player.deck.reduce(
+        (total, item) => total + item.cost,
+        0,
+      );
+      console.log('soma do dinheiro do deck' +deckMoney)
       return {
         ...state,
         player: {
           ...state.player,
-          money: state.initialMoney,
+          money: state.player.money + deckMoney,
           deck: [],
         },
       };
+    }
     case "START_GAME":
       return {
         ...state,
@@ -74,6 +80,10 @@ export function GameReducer(
             playerSelectedCard: null,
             cpuSelectedCard: null,
             turn: state.player.name,
+            damageEffect: {
+              cpuDamage: null,
+              playerDamage: null,
+            },
           },
         },
       };
@@ -144,6 +154,9 @@ export function GameReducer(
       const cpuDamage = Math.max(0, player.attack * (1 - cpu.defense / 100));
       const playerDamage = Math.max(0, cpu.attack * (1 - player.defense / 100));
 
+      const cpuMoreDamage = cpuDamage > playerDamage;
+      const playerMoreDamage = playerDamage > cpuDamage;
+
       const updateCpu = {
         ...cpu,
         hp: Math.max(0, cpu.hp - cpuDamage),
@@ -167,19 +180,41 @@ export function GameReducer(
             ...state.battle.arena,
             playerSelectedCard: updatePlayer.hp > 0 ? updatePlayer : null,
             cpuSelectedCard: updateCpu.hp > 0 ? updateCpu : null,
+            damageEffect: {
+              cpuDamage: cpuMoreDamage,
+              playerDamage: playerMoreDamage,
+            },
           },
           isFighting: updateCpu.hp > 0 && updatePlayer.hp > 0 ? true : false,
         },
       };
     }
+    case "CLEAR_DAMAGE_EFFECT": {
+      return {
+        ...state,
+        player: {
+          ...state.player,
+        },
+        battle: {
+          ...state.battle,
+          arena: {
+            ...state.battle.arena,
+            damageEffect: {
+              cpuDamage: null,
+              playerDamage: null,
+            },
+          },
+        },
+      };
+    }
     case "FINISH_BATTLE": {
-      const bonus = action.payload.winner == state.player.name ? 60 : 0
+      const bonus = action.payload.winner == state.player.name ? 60 : 0;
       return {
         ...state,
         step: "end",
         player: {
           ...state.player,
-          money: state.player.money + bonus
+          money: state.player.money + bonus,
         },
         battle: {
           ...state.battle,

@@ -14,7 +14,12 @@ export function Home() {
   return (
     <>
     
-      {state.step === 'start' && <><Heading /> <Container><Form /> </Container></>}
+      {state.step === 'start' && <> 
+      <div className="section-center">
+        <Heading />
+        <Container><Form /> </Container>
+      </div>
+      </>}
 
       {state.step == 'shop' && <Container><Lobby /></Container> }
     
@@ -22,7 +27,7 @@ export function Home() {
       {state.step == 'battle' && <Container type="fluid"><Battle /> </Container>}
     
     {state.step == 'end' && <Winner/>}
-    <DinoCash />
+    {state.step != 'start' && <DinoCash />}
     </>
   );
 }
