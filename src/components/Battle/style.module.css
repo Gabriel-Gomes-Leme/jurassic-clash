@@ -75,30 +75,3 @@
     background: var(--background);
     transition: all 0.3s ease;
 }
-.damageOverlay{
-    position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 78px;
-  color: red;
-  font-weight: bold;
-  pointer-events: none;
-
-  animation: damagePop 0.3s ease;
-}
-@keyframes damagePop {
-  0% {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.3);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0;
-  }
-}
